@@ -16,7 +16,7 @@ function App(){
         return setmessage("passwords do not match");
       }
       
-      const response = await fetch("http://localhost:5000/add",{
+      const response = await fetch("https://fsdbackend.onrender.com/add",{
         method: "POST",
         headers: {"Content-Type":"application/json"},
         body: JSON.stringify({username,email,password})
@@ -26,13 +26,13 @@ function App(){
       setmessage(data.message);
     }
     return(
-      <div>
+      <div style={{textAlign:"center"}}>
         <h1>REGISTER</h1>
         <form onSubmit={submitfunc}>
               <input type = "text" placeholder = "USERNAME" value = {username} onChange={(e)=>setusername(e.target.value)}/><br/>
               <input type = "text" placeholder = "EMAIL" value = {email} onChange={(e)=>setemail(e.target.value)}/><br/>
-              <input type = "text" placeholder = "PASSWORD" value = {password} onChange={(e)=>setpassword(e.target.value)}/><br/>
-              <input type = "text" placeholder = "CONFIRMPASSWORD" value = {confirmpassword} onChange={(e)=>setconfirmpassword(e.target.value)}/><br/>
+              <input type = "password" placeholder = "PASSWORD" value = {password} onChange={(e)=>setpassword(e.target.value)}/><br/>
+              <input type = "password" placeholder = "CONFIRMPASSWORD" value = {confirmpassword} onChange={(e)=>setconfirmpassword(e.target.value)}/><br/>
               <button type="submit">REGISTER</button>
         </form>
         <p style={{color:"red"}}>{message}</p>

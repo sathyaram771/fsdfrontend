@@ -5,12 +5,17 @@ function App() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmpassword, setConfirmpassword] = useState("");
+  const [empId, setEmpId] = useState("");
+  const [department, setDepartment] = useState("");
+  const [dateOfJoining, setDateOfJoining] = useState("");
+  const [role, setRole] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
   const [message, setMessage] = useState("");
-  const [users, setUsers] = useState([]); // State to hold user data
+  const [users, setUsers] = useState([]);
 
   const submitfunc = async (e) => {
     e.preventDefault();
-    if (!username || !email || !password || !confirmpassword) {
+    if (!username || !email || !password || !confirmpassword || !empId || !department || !dateOfJoining || !role || !phoneNumber) {
       return setMessage("Please enter all the fields");
     }
     if (password !== confirmpassword) {
@@ -20,7 +25,7 @@ function App() {
     const response = await fetch("https://fsdbackend.onrender.com/add", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ username, email, password }),
+      body: JSON.stringify({ username, email, password, empId, department, dateOfJoining, role, phoneNumber }),
     });
     const data = await response.json();
     setMessage(data.message);
@@ -64,6 +69,41 @@ function App() {
           onChange={(e) => setConfirmpassword(e.target.value)}
         />
         <br />
+        <input
+          type="text"
+          placeholder="EMPLOYEE ID"
+          value={empId}
+          onChange={(e) => setEmpId(e.target.value)}
+        />
+        <br />
+        <input
+          type="text"
+          placeholder="DEPARTMENT"
+          value={department}
+          onChange={(e) => setDepartment(e.target.value)}
+        />
+        <br />
+        <input
+          type="date"
+          placeholder="DATE OF JOINING"
+          value={dateOfJoining}
+          onChange={(e) => setDateOfJoining(e.target.value)}
+        />
+        <br />
+        <input
+          type="text"
+          placeholder="ROLE"
+          value={role}
+          onChange={(e) => setRole(e.target.value)}
+        />
+        <br />
+        <input
+          type="text"
+          placeholder="PHONE NUMBER"
+          value={phoneNumber}
+          onChange={(e) => setPhoneNumber(e.target.value)}
+        />
+        <br />
         <button type="submit">REGISTER</button>
       </form>
       <p style={{ color: "red" }}>{message}</p>
@@ -80,6 +120,11 @@ function App() {
                 <th>ID</th>
                 <th>Username</th>
                 <th>Email</th>
+                <th>Employee ID</th>
+                <th>Department</th>
+                <th>Date of Joining</th>
+                <th>Role</th>
+                <th>Phone Number</th>
               </tr>
             </thead>
             <tbody>
@@ -88,6 +133,11 @@ function App() {
                   <td>{user.id}</td>
                   <td>{user.username}</td>
                   <td>{user.email}</td>
+                  <td>{user.empId}</td>
+                  <td>{user.department}</td>
+                  <td>{user.dateOfJoining}</td>
+                  <td>{user.role}</td>
+                  <td>{user.phoneNumber}</td>
                 </tr>
               ))}
             </tbody>

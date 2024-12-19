@@ -21,6 +21,9 @@ function App() {
     if (password !== confirmpassword) {
       return setMessage("Passwords do not match");
     }
+    if (phoneNumber.length !== 10 || isNaN(phoneNumber)) {
+      return setMessage("Phone number must be 10 digits");
+    }
 
     const response = await fetch("https://fsdbackend.onrender.com/add", {
       method: "POST",
